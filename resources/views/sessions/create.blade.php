@@ -16,8 +16,12 @@
             <form action="{{route('login')}}" method="POST">
                 {{csrf_field()}}
 
-                <div class="form-group"><label for="email">邮箱: </label><input type="text" class="form-control"></div>
-                <div class="form-group"><label for="password">密码: </label><input type="password" class="form-control">
+                <div class="form-group">
+                    <label for="email">邮箱: </label>
+                    <input type="text" name="email" class="form-control"></div>
+                <div class="form-group">
+                    <label for="password">密码: </label>
+                    <input type="password" name="password" class="form-control">
                 </div>
 
                 <button type="submit" class="btn btn-primary">

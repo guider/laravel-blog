@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 class SessionsController extends Controller
 {
-    //
     public function create()
     {
         return view('sessions.create');
@@ -17,7 +16,7 @@ class SessionsController extends Controller
     public function store(Request $request)
     {
         $credentials = $this->validate($request, [
-            'email' => 'require|email|max:255',
+            'email' => 'required|email|max:255',
             'password' => 'required'
         ]);
 
@@ -32,5 +31,10 @@ class SessionsController extends Controller
 
         }
 
+    }
+
+    public function destory()
+    {
+        
     }
 }
