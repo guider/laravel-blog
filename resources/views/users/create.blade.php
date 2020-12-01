@@ -29,8 +29,11 @@
                                                                                               class="form-control"
                                                                                               value="{{old('password_confirmation')}}">
                     </div>
+
                     <button class="btn btn-primary" type="submit">注册</button>
                 </form>
+
+                <hr>
             </div>
         </div>
 
