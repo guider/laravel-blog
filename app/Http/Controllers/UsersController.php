@@ -18,6 +18,14 @@ class UsersController extends Controller
 
     }
 
+    public function destroy(User $user)
+    {
+        $this->authorize('destroy',$user);
+       $user->delete();
+       session()->flash('success','用户已删除');
+       return back();
+    }
+
 
     public function index()
     {
