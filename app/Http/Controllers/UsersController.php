@@ -20,4 +20,16 @@ class UsersController extends Controller
         return view('users.create');
     }
 
+    public function store(Request $request)
+    {
+
+        $this->validate($request,[
+           'name'=>'required|unique:users|min:3|max:50',
+           'email'=>'required|email|unique:users|max:255',
+           'password'=>'required|confirmed|min:6'
+        ]);
+
+
+
+    }
 }
