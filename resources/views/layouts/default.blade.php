@@ -11,9 +11,10 @@
 <body>
 @include('layouts._header')
 <div class="container">
+    @include('shared._message')
     @yield('content')
+    @include('layouts._footer')
 
 </div>
-@include('layouts._footer')
 </body>
 </html>
