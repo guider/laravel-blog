@@ -13,10 +13,12 @@
         {{$status->content}}
     </div>
     @can('destroy',$status,$user)
-        <form action="{{route('statuses.destroy',$status->id)}}" method="POST">
+        <form action="{{route('statuses.destroy',$status->id)}}" method="POST"                     onsubmit="return confirm('确认删除吗?')"
+        >
             {{csrf_field()}}
             {{method_field('DELETE')}}
-            <button class="btn btn-sn btn-danger" type="submit">
+            <button class="btn btn-sn btn-danger" type="submit"
+            >
                 删除
             </button>
 
