@@ -10968,3 +10968,32 @@ section.user_info .gravatar {
   max-width: 100px;
 }
 
+.stats {
+  overflow: auto;
+  margin-top: 0;
+  padding: 0;
+}
+
+.stats a {
+  float: left;
+  padding: 0 10px;
+  text-align: center;
+  border-left: 1px solid #eee;
+}
+
+.stats a:first-child {
+  padding-left: 0;
+  border: 0;
+}
+
+.stats a:hover {
+  text-decoration: none;
+  color: #337ab7;
+}
+
+.stats a strong {
+  display: block;
+  font-size: 1.2em;
+  color: black;
+}
+
