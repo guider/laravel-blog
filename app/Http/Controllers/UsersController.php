@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class UsersController extends Controller
 {
     //
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['show', 'create', 'store','index']]);
+        $this->middleware('auth', ['except' => ['show', 'create', 'store','index','confirmEmail']]);
         $this->middleware('guest',[
             'only'=>['create']
         ]);
@@ -60,8 +61,9 @@ class UsersController extends Controller
         ]);
 
 
-        Auth::login($user);
-        session()->flash('success', '欢迎, 注册成功');
+//        Auth::login($user);
+        $this->sendEmailConfirmationTo($user);
+        session()->flash('success', '请到您的邮箱激活');
         return redirect()->route('users.show', [$user]);
 
     }
@@ -97,4 +99,31 @@ class UsersController extends Controller
         return redirect()->route('users.show', $user->id);
 
     }
+
+    public function confirmEmail($token)
+    {
+        $user=User::where('activation_token',$token)->firstOrFail();
+        $user->activated=true;
+        $user->save();
+        Auth::login($user);
+        session()->flash('success','激活成功');
+        return redirect()->route('users.show',compact('user'));
+
+    }
+
+    protected function sendEmailConfirmationTo(User $user)
+    {
+        $view='emails.confirm';
+        $data=compact('user');
+        $from='guider@yeah.net';
+        $name='guider';
+        $to=$user->email;
+        $subject = '欢迎注册,请确认邮箱';
+        Mail::send($view,$data,function ($message) use ($from,$name,$to,$subject){
+            $message->from($from)->to($to)->subject($subject);
+        });
+
+    }
+
 }
+

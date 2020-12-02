@@ -33,10 +33,17 @@ class SessionsController extends Controller
 
 
         if (Auth::attempt($credentials, $request->has('remember'))) {
-            session()->flash('success', '登录成功');
-            $fallback = route('users.show', [Auth::user()]);
+            if (Auth::user()->activated) {
+                session()->flash('success', '登录成功');
+                $fallback = route('users.show', [Auth::user()]);
 
-            return redirect()->intended($fallback);
+                return redirect()->intended($fallback);
+            } else {
+                Auth::logout();
+                session()->flash('warning', '账号未激活');
+
+                return redirect('/');
+            }
         } else {
 
             session()->flash('danger', '用户名密码不匹配');
@@ -46,10 +53,12 @@ class SessionsController extends Controller
 
     }
 
+
     public function destroy()
     {
         Auth::logout();
         session()->flash('success', '您已退出登录');
         return redirect('login');
     }
+
 }
