@@ -119,8 +119,8 @@ class UsersController extends Controller
         $name='guider';
         $to=$user->email;
         $subject = '欢迎注册,请确认邮箱';
-        Mail::send($view,$data,function ($message) use ($from,$name,$to,$subject){
-            $message->from($from)->to($to)->subject($subject);
+        Mail::send($view,$data,function ($message) use ($to,$subject){
+            $message->to($to)->subject($subject);
         });
 
     }
