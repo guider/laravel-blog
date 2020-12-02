@@ -20,7 +20,7 @@
                     <label for="email">邮箱: </label>
                     <input type="text" name="email" class="form-control"></div>
                 <div class="form-group">
-                    <label for="password">密码: </label>
+                    <label for="password">密码: <a href="{{route('password.request')}}"></a></label>
                     <input type="password" name="password" class="form-control">
                 </div>
 
