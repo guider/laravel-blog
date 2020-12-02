@@ -17,8 +17,7 @@
         >
             {{csrf_field()}}
             {{method_field('DELETE')}}
-            <button class="btn btn-sn btn-danger" type="submit"
-            >
+            <button class="btn btn-sn btn-danger" type="submit">
                 删除
             </button>
 
